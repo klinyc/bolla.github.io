@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RePlate: Sustainable Dining Revolution in NYC</title>
+    
+    <!-- Chosen Palette: Warm Neutral (Stone), Sophisticated Green, Amber Accent -->
+    <!-- Application Structure Plan: A single-page scrolling application with a fixed nav. Sections include: Hero, The Problem (stats), The Solution (interactive steps), The Opportunity (dashboard with interactive charts), Value Proposition (tabs for Restaurants/Non-Profits), Financial Outlook (interactive line chart), and a final CTA. This structure tells a compelling story from problem to solution to opportunity, allowing users to explore data interactively rather than reading a static document. -->
+    <!-- Visualization & Content Choices: Problem -> Inform -> Large stat cards -> Simplicity & Impact. TAM -> Inform/Compare -> Interactive Donut/Bar Charts (Chart.js) -> Allows user to explore scenarios (low/high adoption). Value Prop -> Organize -> Tabbed Interface -> Segments info cleanly for different audiences. Financials -> Show Change -> Interactive Line Chart (Chart.js) -> Visualizes growth trends effectively. All choices avoid SVG/Mermaid and prioritize user interaction with data. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F5F4; /* stone-100 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #F59E0B; /* amber-500 */
+        }
+        .tab-active {
+            background-color: #166534; /* green-800 */
+            color: white;
+        }
+        .tab-inactive {
+            background-color: #E5E7EB; /* gray-200 */
+            color: #374151; /* gray-700 */
+        }
+    </style>
+</head>
+<body class="text-stone-800">
+
+    <header class="bg-stone-100/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="text-2xl font-bold text-green-800">RePlate</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#problem" class="nav-link font-medium">The Problem</a>
+                <a href="#solution" class="nav-link font-medium">Solution</a>
+                <a href="#market" class="nav-link font-medium">Market</a>
+                <a href="#value" class="nav-link font-medium">Value</a>
+                <a href="#financials" class="nav-link font-medium">Projections</a>
+            </div>
+            <a href="#join" class="hidden md:block bg-green-800 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-700 transition-colors">Join Us</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="bg-stone-200 min-h-[60vh] flex items-center">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-green-900 leading-tight">Sustainable Dining,<br>Redefined for NYC.</h1>
+                <p class="mt-4 text-lg md:text-xl text-stone-700 max-w-3xl mx-auto">RePlate is building a thriving, eco-conscious community by transforming takeout into a sustainable, rewarding experience for consumers, restaurants, and our planet.</p>
+                <div class="mt-8 flex justify-center gap-4">
+                    <a href="#solution" class="bg-green-800 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-green-700 transition-colors">Discover the Solution</a>
+                    <a href="#market" class="bg-white text-green-800 font-bold py-3 px-8 rounded-lg text-lg border-2 border-green-800 hover:bg-green-50 transition-colors">See the Opportunity</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="problem" class="py-20 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-stone-900">A City Drowning in Single-Use Waste</h2>
+                <p class="mt-4 text-lg text-stone-600 max-w-2xl mx-auto">New York's vibrant food scene comes at a cost. The linear "take-make-dispose" model is unsustainable for our city and our planet.</p>
+                <div class="mt-12 grid md:grid-cols-3 gap-8">
+                    <div class="bg-stone-100 p-8 rounded-lg shadow-sm">
+                        <div class="text-5xl font-extrabold text-amber-500">Millions</div>
+                        <p class="mt-2 text-xl font-semibold">Of single-use containers end up in landfills daily, straining our waste management systems.</p>
+                    </div>
+                    <div class="bg-stone-100 p-8 rounded-lg shadow-sm">
+                        <div class="text-5xl font-extrabold text-amber-500">Tons</div>
+                        <p class="mt-2 text-xl font-semibold">Of plastic pollution threatens our local waterways and ecosystems every year.</p>
+                    </div>
+                    <div class="bg-stone-100 p-8 rounded-lg shadow-sm">
+                        <div class="text-5xl font-extrabold text-amber-500">Rising Costs</div>
+                        <p class="mt-2 text-xl font-semibold">For restaurants facing increasing prices for disposable packaging and waste removal.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="solution" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-stone-900">Our Solution: The RePlate Ecosystem</h2>
+                <p class="mt-4 text-lg text-center text-stone-600 max-w-2xl mx-auto">We've created a seamless, circular system that benefits everyone. This is how we transform a single meal into a collective impact.</p>
+                <div class="mt-12 grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-green-800">
+                        <div class="text-3xl font-bold text-green-800 mb-4">1. Purchase</div>
+                        <h3 class="text-xl font-semibold mb-2">Consumer Engagement</h3>
+                        <p class="text-stone-600">Customers buy a high-quality, reusable RePlate silicone container at a partner restaurant, starting their journey.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-green-800">
+                        <div class="text-3xl font-bold text-green-800 mb-4">2. Reward</div>
+                        <h3 class="text-xl font-semibold mb-2">Eco-Reward Program</h3>
+                        <p class="text-stone-600">Using the RePlate app, every reuse earns "Green Points" for discounts, eco-products, or non-profit donations.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-green-800">
+                        <div class="text-3xl font-bold text-green-800 mb-4">3. Partner</div>
+                        <h3 class="text-xl font-semibold mb-2">Restaurant Network</h3>
+                        <p class="text-stone-600">Healthy fast-casual restaurants join our network, reducing waste and attracting loyal, conscious consumers.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-green-800">
+                        <div class="text-3xl font-bold text-green-800 mb-4">4. Impact</div>
+                        <h3 class="text-xl font-semibold mb-2">Non-Profit Backing</h3>
+                        <p class="text-stone-600">We align with leading NYC environmental non-profits, adding credibility and amplifying our collective mission.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="market" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-stone-900">The Opportunity: A Market Ready for Change</h2>
+                <p class="mt-4 text-lg text-center text-stone-600 max-w-2xl mx-auto">We are targeting NYC's rapidly growing healthy fast-casual sector—a perfect intersection of high-volume takeout and an environmentally aware consumer base.</p>
+                <div class="mt-12 grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-center mb-4">Target Consumer Market</h3>
+                        <div class="chart-container" style="height: 300px; max-height: 300px;">
+                            <canvas id="tamConsumerChart"></canvas>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-center mb-4">Container Sales Potential (TAM)</h3>
+                        <div class="chart-container" style="height: 300px; max-height: 300px;">
+                            <canvas id="tamSalesChart"></canvas>
+                        </div>
+                         <div class="text-center mt-4">
+                            <button id="lowAdoptionBtn" class="bg-green-800 text-white py-2 px-4 rounded-lg">Low Adoption</button>
+                            <button id="highAdoptionBtn" class="bg-stone-200 text-stone-800 py-2 px-4 rounded-lg">High Adoption</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-16 grid md:grid-cols-3 gap-8 text-center">
+                    <div class="bg-stone-100 p-8 rounded-lg">
+                        <div class="text-4xl font-extrabold text-green-800">1,000+</div>
+                        <p class="mt-2 text-lg font-medium">Target Healthy QSRs in NYC</p>
+                    </div>
+                     <div class="bg-stone-100 p-8 rounded-lg">
+                        <div class="text-4xl font-extrabold text-green-800">2M</div>
+                        <p class="mt-2 text-lg font-medium">Active Target Consumers</p>
+                    </div>
+                    <div class="bg-stone-100 p-8 rounded-lg">
+                        <div class="text-4xl font-extrabold text-green-800">57M+</div>
+                        <p class="mt-2 text-lg font-medium">Potential Annual Reuses</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="value" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-stone-900">A Shared Value Proposition</h2>
+                <p class="mt-4 text-lg text-center text-stone-600 max-w-2xl mx-auto">RePlate creates a symbiotic ecosystem where every partner wins, from local restaurants to city-wide environmental champions.</p>
+                <div class="mt-12 max-w-3xl mx-auto">
+                    <div class="flex justify-center border-b border-stone-300">
+                        <button id="tab-restaurants" class="tab-btn tab-active py-3 px-6 text-lg font-semibold rounded-t-lg">For Restaurants</button>
+                        <button id="tab-nonprofits" class="tab-btn tab-inactive py-3 px-6 text-lg font-semibold rounded-t-lg">For Non-Profits</button>
+                    </div>
+                    <div id="content-restaurants" class="tab-content bg-white p-8 rounded-b-lg shadow-md">
+                        <ul class="space-y-4">
+                            <li class="flex items-start"><span class="text-green-800 font-bold mr-3">✔</span><div><strong class="font-semibold">Cost Savings:</strong> Dramatically reduce recurring costs of disposable packaging and waste removal.</div></li>
+                            <li class="flex items-start"><span class="text-green-800 font-bold mr-3">✔</span><div><strong class="font-semibold">Enhanced Brand & Loyalty:</strong> Attract and retain eco-conscious consumers by becoming a certified sustainability leader.</div></li>
+                            <li class="flex items-start"><span class="text-green-800 font-bold mr-3">✔</span><div><strong class="font-semibold">Increased Repeat Business:</strong> Our eco-reward program incentivizes customers to choose your restaurant more frequently.</div></li>
+                            <li class="flex items-start"><span class="text-green-800 font-bold mr-3">✔</span><div><strong class="font-semibold">Competitive Edge:</strong> Differentiate your business in a crowded market with a unique, values-aligned offering.</div></li>
+                        </ul>
+                    </div>
+                    <div id="content-nonprofits" class="tab-content bg-white p-8 rounded-b-lg shadow-md" style="display: none;">
+                        <ul class="space-y-4">
+                            <li class="flex items-start"><span class="text-green-800 font-bold mr-3">✔</span><div><strong class="font-semibold">Achieve Your Mission:</strong> Directly contribute to your waste reduction goals with millions of reuses annually.</div></li>
+                            <li class="flex items-start"><span class="text-green-800 font-bold mr-3">✔</span><div><strong class="font-semibold">New Funding Streams:</strong> Receive direct revenue share and donations from consumer point redemptions.</div></li>
+                            <li class="flex items-start"><span class="text-green-800 font-bold mr-3">✔</span><div><strong class="font-semibold">Amplify Your Message:</strong> Engage a large, active community and gain brand exposure through our platform and network.</div></li>
+                            <li class="flex items-start"><span class="text-green-800 font-bold mr-3">✔</span><div><strong class="font-semibold">Data for Advocacy:</strong> Utilize our aggregated impact data to strengthen your reports and advocacy campaigns.</div></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="financials" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-stone-900">Financial Outlook & Projections</h2>
+                <p class="mt-4 text-lg text-center text-stone-600 max-w-2xl mx-auto">Our model is designed for sustainable growth, built on diverse, recurring revenue streams and a clear path to profitability.</p>
+                <div class="mt-12">
+                     <div class="chart-container" style="height: 400px; max-height: 400px; max-width: 800px;">
+                        <canvas id="financialsChart"></canvas>
+                    </div>
+                </div>
+                <div class="mt-12 overflow-x-auto">
+                    <table class="min-w-full bg-stone-50 border">
+                        <thead>
+                            <tr class="bg-green-800 text-white">
+                                <th class="py-3 px-4 text-left font-semibold">Metric (USD)</th>
+                                <th class="py-3 px-4 text-right font-semibold">Year 1 (Projection)</th>
+                                <th class="py-3 px-4 text-right font-semibold">Year 2 (Projection)</th>
+                                <th class="py-3 px-4 text-right font-semibold">Year 3 (Projection)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-stone-200">
+                            <tr><td colspan="4" class="py-2 px-4 bg-stone-100 font-bold text-stone-700">Revenue Streams</td></tr>
+                            <tr>
+                                <td class="py-3 px-4">Restaurant Subscriptions</td>
+                                <td class="py-3 px-4 text-right">$90,000</td>
+                                <td class="py-3 px-4 text-right">$270,000</td>
+                                <td class="py-3 px-4 text-right">$540,000</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4">Container Sales (Our Share)</td>
+                                <td class="py-3 px-4 text-right">$375,000</td>
+                                <td class="py-3 px-4 text-right">$750,000</td>
+                                <td class="py-3 px-4 text-right">$1,125,000</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4">Corporate Sponsorships</td>
+                                <td class="py-3 px-4 text-right">$50,000</td>
+                                <td class="py-3 px-4 text-right">$150,000</td>
+                                <td class="py-3 px-4 text-right">$300,000</td>
+                            </tr>
+                            <tr class="bg-stone-100 font-semibold">
+                                <td class="py-3 px-4">Total Revenue</td>
+                                <td class="py-3 px-4 text-right">$515,000</td>
+                                <td class="py-3 px-4 text-right">$1,170,000</td>
+                                <td class="py-3 px-4 text-right">$1,965,000</td>
+                            </tr>
+                             <tr><td colspan="4" class="py-2 px-4 bg-stone-100 font-bold text-stone-700">Financials</td></tr>
+                             <tr>
+                                <td class="py-3 px-4">Estimated Operating Costs</td>
+                                <td class="py-3 px-4 text-right text-red-600">($385,000)</td>
+                                <td class="py-3 px-4 text-right text-red-600">($760,000)</td>
+                                <td class="py-3 px-4 text-right text-red-600">($1,100,000)</td>
+                            </tr>
+                             <tr class="bg-green-100 font-bold">
+                                <td class="py-3 px-4">Net Profit</td>
+                                <td class="py-3 px-4 text-right text-green-800">$130,000</td>
+                                <td class="py-3 px-4 text-right text-green-800">$410,000</td>
+                                <td class="py-3 px-4 text-right text-green-800">$865,000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="join" class="py-24 bg-green-800 text-white">
+             <div class="container mx-auto px-6 text-center">
+                 <h2 class="text-3xl md:text-4xl font-bold">Join the RePlate Movement</h2>
+                 <p class="mt-4 text-lg text-green-100 max-w-2xl mx-auto">We're seeking partners to help us scale our platform, expand our network, and build a truly sustainable dining future for NYC. Let's transform takeout, one reusable container at a time.</p>
+                 <div class="mt-8">
+                     <a href="mailto:partners@replate.eco" class="bg-white text-green-800 font-bold py-4 px-10 rounded-lg text-xl hover:bg-green-50 transition-colors">Contact Us</a>
+                 </div>
+             </div>
+        </section>
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 RePlate. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const chartFontColor = '#374151'; 
+            const gridColor = '#E5E7EB'; 
+
+            const tamConsumerData = {
+                labels: ['Target Consumers (Healthy Fast-Casual)', 'Rest of NYC Population'],
+                datasets: [{
+                    label: 'NYC Population Segment',
+                    data: [1500000, 8480000 - 1500000],
+                    backgroundColor: ['#166534', '#D1FAE5'],
+                    borderColor: '#F5F5F4',
+                    borderWidth: 2,
+                    hoverOffset: 4
+                }]
+            };
+
+            const tamConsumerChartCtx = document.getElementById('tamConsumerChart').getContext('2d');
+            new Chart(tamConsumerChartCtx, {
+                type: 'doughnut',
+                data: tamConsumerData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: chartFontColor,
+                                font: { size: 14 }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += new Intl.NumberFormat('en-US').format(context.parsed);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const tamSalesData = {
+                low: {
+                    labels: ['Low End ($1.5M)', 'High End ($7.5M)'],
+                    data: [1.5, 7.5]
+                },
+                high: {
+                    labels: ['Low End ($1.5M)', 'High End ($7.5M)'],
+                    data: [3.75, 7.5]
+                }
+            };
+
+            let currentSalesScenario = 'low';
+
+            const tamSalesChartCtx = document.getElementById('tamSalesChart').getContext('2d');
+            const tamSalesChart = new Chart(tamSalesChartCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Low Adoption (15%)', 'High Adoption (25%)'],
+                     datasets: [{
+                        label: 'Revenue Potential ($M)',
+                        data: [1.5, 3.75], 
+                        backgroundColor: ['#4ADE80', '#16A34A'],
+                        borderColor: ['#22C55E', '#15803D'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                         x: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Revenue in Millions (USD)', color: chartFontColor, font: { size: 14 }},
+                            ticks: { color: chartFontColor },
+                            grid: { color: gridColor }
+                        },
+                        y: {
+                            ticks: { color: chartFontColor, font: { size: 14 }},
+                             grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                    }
+                }
+            });
+            
+            const updateSalesChart = (scenario) => {
+                let newData, newBgColors, newBorderColors;
+                if(scenario === 'low') {
+                    newData = [1.5, 3.75];
+                    newBgColors = ['#4ADE80', '#16A34A'];
+                    newBorderColors = ['#22C55E', '#15803D'];
+                    document.getElementById('lowAdoptionBtn').classList.add('bg-green-800', 'text-white');
+                    document.getElementById('lowAdoptionBtn').classList.remove('bg-stone-200', 'text-stone-800');
+                    document.getElementById('highAdoptionBtn').classList.add('bg-stone-200', 'text-stone-800');
+                    document.getElementById('highAdoptionBtn').classList.remove('bg-green-800', 'text-white');
+                } else {
+                    newData = [3.75, 7.5];
+                    newBgColors = ['#16A34A', '#14532D'];
+                    newBorderColors = ['#15803D', '#052E16'];
+                     document.getElementById('highAdoptionBtn').classList.add('bg-green-800', 'text-white');
+                    document.getElementById('highAdoptionBtn').classList.remove('bg-stone-200', 'text-stone-800');
+                    document.getElementById('lowAdoptionBtn').classList.add('bg-stone-200', 'text-stone-800');
+                    document.getElementById('lowAdoptionBtn').classList.remove('bg-green-800', 'text-white');
+                }
+                tamSalesChart.data.datasets[0].data = newData;
+                tamSalesChart.data.datasets[0].backgroundColor = newBgColors;
+                tamSalesChart.data.datasets[0].borderColor = newBorderColors;
+                tamSalesChart.update();
+            };
+
+            document.getElementById('lowAdoptionBtn').addEventListener('click', () => updateSalesChart('low'));
+            document.getElementById('highAdoptionBtn').addEventListener('click', () => updateSalesChart('high'));
+
+            const financialsData = {
+                labels: ['Year 1', 'Year 2', 'Year 3'],
+                datasets: [
+                    {
+                        label: 'Total Revenue',
+                        data: [515000, 1170000, 1965000],
+                        borderColor: '#166534',
+                        backgroundColor: '#166534',
+                        tension: 0.1,
+                        fill: false
+                    },
+                    {
+                        label: 'Operating Costs',
+                        data: [385000, 760000, 1100000],
+                        borderColor: '#F59E0B',
+                        backgroundColor: '#F59E0B',
+                        tension: 0.1,
+                        fill: false
+                    },
+                    {
+                        label: 'Net Profit',
+                        data: [130000, 410000, 865000],
+                        borderColor: '#22C55E',
+                        backgroundColor: '#22C55E',
+                        tension: 0.1,
+                        fill: false
+                    }
+                ]
+            };
+
+            const financialsChartCtx = document.getElementById('financialsChart').getContext('2d');
+            new Chart(financialsChartCtx, {
+                type: 'line',
+                data: financialsData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: chartFontColor,
+                                callback: function(value) {
+                                    return '$' + (value / 1000) + 'K';
+                                }
+                            },
+                             grid: { color: gridColor }
+                        },
+                        x: {
+                           ticks: { color: chartFontColor, font: { size: 14 }},
+                           grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: chartFontColor,
+                                font: { size: 14 }
+                            }
+                        },
+                    }
+                }
+            });
+            
+            const tabs = document.querySelectorAll('.tab-btn');
+            const contents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const targetId = tab.id.replace('tab-', '');
+                    
+                    tabs.forEach(t => {
+                        t.classList.remove('tab-active');
+                        t.classList.add('tab-inactive');
+                    });
+                    
+                    tab.classList.remove('tab-inactive');
+                    tab.classList.add('tab-active');
+
+                    contents.forEach(content => {
+                        if (content.id === `content-${targetId}`) {
+                            content.style.display = 'block';
+                        } else {
+                            content.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
