@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RePlate: Sustainable Dining Revolution in NYC</title>
+    <title>Bolla: Sustainable Dining Revolution in NYC</title>
     
     <!-- Chosen Palette: Warm Neutral (Stone), Sophisticated Green, Amber Accent -->
     <!-- Application Structure Plan: A single-page scrolling application with a fixed nav. Sections include: Hero, The Problem (stats), The Solution (interactive steps), The Opportunity (dashboard with interactive charts), Value Proposition (tabs for Restaurants/Non-Profits), Financial Outlook (interactive line chart), and a final CTA. This structure tells a compelling story from problem to solution to opportunity, allowing users to explore data interactively rather than reading a static document. -->
@@ -48,21 +48,52 @@
             background-color: #E5E7EB; /* gray-200 */
             color: #374151; /* gray-700 */
         }
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+        .modal-close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6B7280;
+        }
     </style>
 </head>
 <body class="text-stone-800">
 
     <header class="bg-stone-100/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#home" class="text-2xl font-bold text-green-800">RePlate</a>
+            <a href="#home" class="text-2xl font-bold text-green-800">Bolla</a>
             <div class="hidden md:flex space-x-8">
                 <a href="#problem" class="nav-link font-medium">The Problem</a>
                 <a href="#solution" class="nav-link font-medium">Solution</a>
                 <a href="#market" class="nav-link font-medium">Market</a>
                 <a href="#value" class="nav-link font-medium">Value</a>
-                <a href="#financials" class="nav-link font-medium">Projections</a>
             </div>
-            <a href="#join" class="hidden md:block bg-green-800 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-700 transition-colors">Join Us</a>
+            <button id="contactUsBtn" class="hidden md:block bg-green-800 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-700 transition-colors">Contact Us</button>
         </nav>
     </header>
 
@@ -70,7 +101,7 @@
         <section id="home" class="bg-stone-200 min-h-[60vh] flex items-center">
             <div class="container mx-auto px-6 text-center">
                 <h1 class="text-4xl md:text-6xl font-extrabold text-green-900 leading-tight">Sustainable Dining,<br>Redefined for NYC.</h1>
-                <p class="mt-4 text-lg md:text-xl text-stone-700 max-w-3xl mx-auto">RePlate is building a thriving, eco-conscious community by transforming takeout into a sustainable, rewarding experience for consumers, restaurants, and our planet.</p>
+                <p class="mt-4 text-lg md:text-xl text-stone-700 max-w-3xl mx-auto">Bolla is building a thriving, eco-conscious community by transforming takeout into a sustainable, rewarding experience for consumers, restaurants, and our planet.</p>
                 <div class="mt-8 flex justify-center gap-4">
                     <a href="#solution" class="bg-green-800 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-green-700 transition-colors">Discover the Solution</a>
                     <a href="#market" class="bg-white text-green-800 font-bold py-3 px-8 rounded-lg text-lg border-2 border-green-800 hover:bg-green-50 transition-colors">See the Opportunity</a>
@@ -101,18 +132,18 @@
 
         <section id="solution" class="py-20">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-center text-stone-900">Our Solution: The RePlate Ecosystem</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-stone-900">Our Solution: The Bolla Ecosystem</h2>
                 <p class="mt-4 text-lg text-center text-stone-600 max-w-2xl mx-auto">We've created a seamless, circular system that benefits everyone. This is how we transform a single meal into a collective impact.</p>
                 <div class="mt-12 grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
                     <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-green-800">
                         <div class="text-3xl font-bold text-green-800 mb-4">1. Purchase</div>
                         <h3 class="text-xl font-semibold mb-2">Consumer Engagement</h3>
-                        <p class="text-stone-600">Customers buy a high-quality, reusable RePlate silicone container at a partner restaurant, starting their journey.</p>
+                        <p class="text-stone-600">Customers buy a high-quality, reusable Bolla silicone container at a partner restaurant, starting their journey.</p>
                     </div>
                     <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-green-800">
                         <div class="text-3xl font-bold text-green-800 mb-4">2. Reward</div>
                         <h3 class="text-xl font-semibold mb-2">Eco-Reward Program</h3>
-                        <p class="text-stone-600">Using the RePlate app, every reuse earns "Green Points" for discounts, eco-products, or non-profit donations.</p>
+                        <p class="text-stone-600">Using the Bolla app, every reuse earns "Green Points" for discounts, eco-products, or non-profit donations.</p>
                     </div>
                     <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-green-800">
                         <div class="text-3xl font-bold text-green-800 mb-4">3. Partner</div>
@@ -155,8 +186,7 @@
                         <div class="text-4xl font-extrabold text-green-800">1,000+</div>
                         <p class="mt-2 text-lg font-medium">Target Healthy QSRs in NYC</p>
                     </div>
-                     <div class="bg-stone-100 p-8 rounded-lg">
-                        <div class="text-4xl font-extrabold text-green-800">2M</div>
+                     <div class="text-4xl font-extrabold text-green-800">2M</div>
                         <p class="mt-2 text-lg font-medium">Active Target Consumers</p>
                     </div>
                     <div class="bg-stone-100 p-8 rounded-lg">
@@ -170,7 +200,7 @@
         <section id="value" class="py-20">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl md:text-4xl font-bold text-center text-stone-900">A Shared Value Proposition</h2>
-                <p class="mt-4 text-lg text-center text-stone-600 max-w-2xl mx-auto">RePlate creates a symbiotic ecosystem where every partner wins, from local restaurants to city-wide environmental champions.</p>
+                <p class="mt-4 text-lg text-center text-stone-600 max-w-2xl mx-auto">Bolla creates a symbiotic ecosystem where every partner wins, from local restaurants to city-wide environmental champions.</p>
                 <div class="mt-12 max-w-3xl mx-auto">
                     <div class="flex justify-center border-b border-stone-300">
                         <button id="tab-restaurants" class="tab-btn tab-active py-3 px-6 text-lg font-semibold rounded-t-lg">For Restaurants</button>
@@ -196,6 +226,8 @@
             </div>
         </section>
 
+        <!-- Financial Outlook & Projections Section - Commented Out -->
+        <!--
         <section id="financials" class="py-20 bg-white">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl md:text-4xl font-bold text-center text-stone-900">Financial Outlook & Projections</h2>
@@ -259,13 +291,14 @@
                 </div>
             </div>
         </section>
+        -->
 
         <section id="join" class="py-24 bg-green-800 text-white">
              <div class="container mx-auto px-6 text-center">
-                 <h2 class="text-3xl md:text-4xl font-bold">Join the RePlate Movement</h2>
+                 <h2 class="text-3xl md:text-4xl font-bold">Join the Bolla Movement</h2>
                  <p class="mt-4 text-lg text-green-100 max-w-2xl mx-auto">We're seeking partners to help us scale our platform, expand our network, and build a truly sustainable dining future for NYC. Let's transform takeout, one reusable container at a time.</p>
                  <div class="mt-8">
-                     <a href="mailto:partners@replate.eco" class="bg-white text-green-800 font-bold py-4 px-10 rounded-lg text-xl hover:bg-green-50 transition-colors">Contact Us</a>
+                     <button id="contactUsFooterBtn" class="bg-white text-green-800 font-bold py-4 px-10 rounded-lg text-xl hover:bg-green-50 transition-colors">Contact Us</button>
                  </div>
              </div>
         </section>
@@ -273,9 +306,31 @@
 
     <footer class="bg-stone-800 text-stone-300 py-8">
         <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2025 RePlate. All Rights Reserved.</p>
+            <p>&copy; 2025 Bolla. All Rights Reserved.</p>
         </div>
     </footer>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-btn" id="closeModalBtn">&times;</button>
+            <h3 class="text-2xl font-bold text-stone-900 mb-4">Contact Bolla</h3>
+            <p class="text-stone-600 mb-6">Please fill out the form below and we'll get back to you soon.</p>
+            <form id="contactForm" class="space-y-4">
+                <div>
+                    <label for="contactEmail" class="block text-sm font-medium text-stone-700">Your Email</label>
+                    <input type="email" id="contactEmail" class="mt-1 block w-full px-3 py-2 border border-stone-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" placeholder="you@example.com" required>
+                </div>
+                <div>
+                    <label for="contactMessage" class="block text-sm font-medium text-stone-700">Your Message</label>
+                    <textarea id="contactMessage" rows="5" class="mt-1 block w-full px-3 py-2 border border-stone-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" placeholder="Enter your message here..." required></textarea>
+                </div>
+                <button type="submit" class="w-full bg-green-800 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700 transition-colors">Send Message</button>
+                <p id="contactMessageStatus" class="text-sm text-center mt-2"></p>
+                <p class="text-xs text-stone-500 text-center mt-4">Note: For demonstration purposes, this message will be logged to the console instead of being sent directly via email from this webpage.</p>
+            </form>
+        </div>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -404,6 +459,8 @@
             document.getElementById('lowAdoptionBtn').addEventListener('click', () => updateSalesChart('low'));
             document.getElementById('highAdoptionBtn').addEventListener('click', () => updateSalesChart('high'));
 
+            // Financials Chart (commented out in HTML, but keeping JS for potential future use)
+            /*
             const financialsData = {
                 labels: ['Year 1', 'Year 2', 'Year 3'],
                 datasets: [
@@ -468,6 +525,7 @@
                     }
                 }
             });
+            */
             
             const tabs = document.querySelectorAll('.tab-btn');
             const contents = document.querySelectorAll('.tab-content');
@@ -492,6 +550,109 @@
                         }
                     });
                 });
+            });
+
+            // Contact Modal Logic
+            const contactUsNavBtn = document.getElementById('contactUsBtn');
+            const contactUsFooterBtn = document.getElementById('contactUsFooterBtn');
+            const contactModal = document.getElementById('contactModal');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const contactForm = document.getElementById('contactForm');
+            const contactEmailInput = document.getElementById('contactEmail');
+            const contactMessageInput = document.getElementById('contactMessage');
+            const contactMessageStatus = document.getElementById('contactMessageStatus');
+
+            function openModal() {
+                contactModal.classList.remove('hidden');
+                contactMessageStatus.textContent = ''; // Clear previous status
+                contactEmailInput.value = ''; // Clear fields
+                contactMessageInput.value = '';
+            }
+
+            function closeModal() {
+                contactModal.classList.add('hidden');
+            }
+
+            contactUsNavBtn.addEventListener('click', openModal);
+            contactUsFooterBtn.addEventListener('click', openModal);
+            closeModalBtn.addEventListener('click', closeModal);
+            contactModal.addEventListener('click', (e) => {
+                if (e.target === contactModal) { // Close if clicked outside modal content
+                    closeModal();
+                }
+            });
+
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault(); // Prevent default form submission
+
+                const email = contactEmailInput.value.trim();
+                const message = contactMessageInput.value.trim();
+
+                if (!email || !message) {
+                    contactMessageStatus.textContent = 'Please fill in both email and message fields.';
+                    contactMessageStatus.className = 'text-sm text-center mt-2 text-red-600';
+                    return;
+                }
+
+                contactMessageStatus.textContent = 'Sending message...';
+                contactMessageStatus.className = 'text-sm text-center mt-2 text-stone-600';
+
+                // IMPORTANT: Replace 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE' with your actual deployed Apps Script URL.
+                // Instructions for setting up Google Apps Script:
+                // 1. Go to script.google.com and create a new project.
+                // 2. In the code editor, paste the following (or similar) Apps Script code:
+                /*
+                function doPost(e) {
+                    var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Contacts"); // Replace "Contacts" with your sheet name
+                    var data = JSON.parse(e.postData.contents);
+                    var email = data.email;
+                    var message = data.message;
+                    var timestamp = new Date();
+
+                    sheet.appendRow([timestamp, email, message]);
+
+                    return ContentService.createTextOutput(JSON.stringify({ 'result': 'success', 'message': 'Data recorded' })).setMimeType(ContentService.MimeType.JSON);
+                }
+
+                function doGet(e) { // Optional: for testing if your web app is deployed
+                    return ContentService.createTextOutput("Hello from Bolla Apps Script!").setMimeType(ContentService.MimeType.TEXT);
+                }
+                */
+                // 3. Save the script (File > Save).
+                // 4. Create a new Google Sheet (e.g., named "Bolla Contacts") in your Google Drive.
+                // 5. In your Google Sheet, create a sheet named "Contacts" (or whatever you used in the script). Add headers like "Timestamp", "Email", "Message".
+                // 6. Deploy the Apps Script as a web app:
+                //    - Click "Deploy" > "New deployment".
+                //    - Select type "Web app".
+                //    - For "Execute as", choose "Me".
+                //    - For "Who has access", choose "Anyone".
+                //    - Click "Deploy".
+                //    - Copy the "Web app URL" provided. This is what you'll paste below.
+                const googleAppsScriptUrl = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE'; 
+
+                try {
+                    const response = await fetch(googleAppsScriptUrl, {
+                        method: 'POST',
+                        mode: 'no-cors', // Required for cross-origin requests with Apps Script without explicit CORS headers
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ email: email, message: message })
+                    });
+
+                    // Since 'no-cors' mode is used, response.ok will always be true, and response.json() will fail.
+                    // A real backend would return a proper JSON response and handle CORS.
+                    // For Apps Script with 'no-cors', we rely on the script executing without error.
+                    contactMessageStatus.textContent = 'Thank you for your message! We will get back to you soon.';
+                    contactMessageStatus.className = 'text-sm text-center mt-2 text-green-600';
+                    contactEmailInput.value = ''; 
+                    contactMessageInput.value = '';
+                    
+                } catch (error) {
+                    console.error('Error submitting form:', error);
+                    contactMessageStatus.textContent = 'There was an error sending your message. Please try again later.';
+                    contactMessageStatus.className = 'text-sm text-center mt-2 text-red-600';
+                }
             });
         });
     </script>
