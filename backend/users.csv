@@ -1,0 +1,5 @@
+user_id,name,phone,email,bowl_id,points,total_transaction_amount,co2_reduced,landfill_reduced
+3ed74917-8b55-4c0d-8f4f-6477d24cacaa,John Smith,555-0101,john.smith@email.com,8ae17655-4290-46c8-bb69-f409fae906b3,3,43.87,3.3,3.33
+eb28b691-458b-4607-a324-cb347b2a223c,Sarah Johnson,555-0102,sarah.johnson@email.com,a5e95d75-4eea-4fbb-b20d-14d1994ad895,3,55.22,3.3,3.33
+eb3a398d-a6ee-4401-939f-ed4366474c9d,Mike Chen,555-0103,mike.chen@email.com,05fb6977-fe9d-4292-bdf6-71b62664dd92,3,57.95,3.3000000000000003,3.33
+43e6f74b-6db1-43ba-82ef-00b8e05820f7,Emily Davis,555-0104,emily.davis@email.com,8b130446-d96e-43a7-85ad-7dd1bd6e68e4,3,53.2,3.3000000000000003,3.33
